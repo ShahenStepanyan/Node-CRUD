@@ -100,7 +100,7 @@ app.post('/create', async (req, res) => {
 });
 
 
-// Middleware to authenticate the token
+
 function authenticateToken(req, res, next) {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
@@ -152,7 +152,7 @@ catch(error){
 })
 
 
-// Start the server
+
 app.listen(3001, () => {
   console.log('Server started on port 3001');
 });
