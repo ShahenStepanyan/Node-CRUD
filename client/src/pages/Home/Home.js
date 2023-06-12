@@ -86,7 +86,7 @@ function Home() {
                   <Typography gutterBottom variant='h5' component='div'>
                     <Link
                       style={{ color: "black", textDecoration: "none" }}
-                      to={`/read/${d.id}`}
+                      to={`/read/${d._id}`}
                     >
                       {d.title}
                     </Link>

@@ -28,7 +28,7 @@ function Update() {
             body: JSON.stringify(inputData)
             
           });
-          console.log(inputData)
+          
          
     }
 

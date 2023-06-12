@@ -13,11 +13,11 @@ function Read() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/post/" + id)
+      .get(`/read/${id}`)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
-
+  
   return (
     <div className='container'>
       <Header/>

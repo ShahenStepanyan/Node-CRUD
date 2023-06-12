@@ -39,18 +39,11 @@ function Login() {
     }
   };
 
-  const handleLogout = () => {
-    setToken('');
-  };
+
 
   return (
     <div className="App">
-      {token ? (
-        <div>
-          <h2>Welcome, {email}!</h2>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
+      
         <div>
           <h2>Login</h2>
           <input

@@ -9,7 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 
-export default function Header() {
+export default function Header(props) {
     const navigate = useNavigate();
     const name = useSelector(function (state) {
         return state.currentUser.name;
@@ -19,7 +19,7 @@ export default function Header() {
         if(name === ''){
             navigate("/login")
         }else {
-            navigate("/profile")
+            navigate(`/profile`)
         }
     }
     return (
@@ -27,7 +27,7 @@ export default function Header() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-
+                    <h1>{props.id}</h1>
                     </Typography>
                     <Button onClick={goTo} color="inherit"><AccountCircleIcon/></Button>
                 </Toolbar>

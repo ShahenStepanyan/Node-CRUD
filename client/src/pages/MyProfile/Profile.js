@@ -21,13 +21,6 @@ export default function Profile() {
     date: "",
   });
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/user/" + id)
-      .then((res) => setInputData(res.data))
-      .catch((err) => console.log(err));
-  }, [name]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     axios({
@@ -47,6 +40,7 @@ export default function Profile() {
 
   return (
     <form >
+      <h1>{name}</h1>
       <div>
         <div>
           <h2>Date Account</h2>

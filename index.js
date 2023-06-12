@@ -46,21 +46,29 @@ const PostSchema = new mongoose.Schema({
 const Post = mongoose.model("Post", PostSchema)
 const User = mongoose.model('User', UserSchema);
 
-// Express middleware to parse JSON
-app.use(express.json());
 
-// Login
+app.use(express.json());
+app.put("/prof/:id", async (req,res) => {
+  const collection = client.db('blog').collection('users');
+  const updateData = req.body;
+  const result = await collection.updateOne(
+    { _id: new ObjectId(req.params.id) },
+    { $set: updateData }
+  );
+  res.json({ message: 'Data updated' });
+})
+
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user in the database
+   
     const user = await User.findOne({ email });
 
     if (user) {
       
       if (user.password === password) {
-        // Create a JWT token
+        
         const token = jwt.sign({ email }, 'secret-key');
 
         res.json({ token });
@@ -81,6 +89,13 @@ app.get('/data', async (req, res) => {
   const data = await collection.find().toArray();
   res.json(data);
 });
+
+app.get('/users', async (req, res) => {
+  const collection = client.db('blog').collection('users');
+  const data = await collection.find().toArray();
+  res.json(data);
+});
+
 
 app.post('/create', async (req, res) => {
   const collection = client.db('blog').collection('data');
@@ -124,6 +139,22 @@ app.put('/update/:id', async (req, res) => {
   );
   res.json({ message: 'Data updated' });
 });
+
+app.get("/read/:id", async (req,res) => {
+  try{
+    const collection = client.db('blog').collection('data');
+  const result = await collection.findOne(
+    {_id: new ObjectId(req.params.id)}
+  )
+    res.json({
+      title: result.title,
+      body: result.body
+    })
+}
+catch(error){
+
+}
+})
 
 
 // Start the server
