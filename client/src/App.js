@@ -19,7 +19,7 @@ function App() {
             <Route path='/create' element={<Create />}></Route>
             <Route path='/update/:id' element={<Update />}></Route>
             <Route path='/read/:id' element={<Read />}></Route>
-            <Route path='/profile' element={<Profile/>}></Route>
+            <Route path='/profile/:id' element={<Profile/>}></Route>
         </Routes>
     </BrowserRouter>
   )

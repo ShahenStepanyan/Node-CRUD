@@ -5,16 +5,14 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import {apiInfo} from "../../api/Api";
-import { useNavigate} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 export default function Profile() {
     const navigate = useNavigate();
 
   const name = useSelector(function (state) {
     return state.currentUser.name;
   });
-  const id = useSelector(function (state) {
-    return state.currentUser.id;
-  });
+  const {id} = useParams();
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
@@ -24,7 +22,7 @@ export default function Profile() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios({
-        url: "http://localhost:3001/user/" + id,
+        url: `/prof/${id}`,
         method: "put",
         header: {
             "Content-Type": "application/json"

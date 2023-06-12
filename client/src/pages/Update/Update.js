@@ -16,7 +16,7 @@ function Update() {
         body: ''
     })
     const navigate = useNavigate();
-    console.log(id)
+    
    
    
     

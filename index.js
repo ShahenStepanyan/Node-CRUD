@@ -31,7 +31,7 @@ mongoose.connect(uri, {
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error(err));
 
-// Create a User model
+
 const UserSchema = new mongoose.Schema({
   email: String,
   password: String,
@@ -90,11 +90,6 @@ app.get('/data', async (req, res) => {
   res.json(data);
 });
 
-app.get('/users', async (req, res) => {
-  const collection = client.db('blog').collection('users');
-  const data = await collection.find().toArray();
-  res.json(data);
-});
 
 
 app.post('/create', async (req, res) => {

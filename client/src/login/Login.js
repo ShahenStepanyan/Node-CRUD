@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from 'react-redux'
+import axios from 'axios';
 function Login() {
   const dispatch = useDispatch()
   const navigat = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
+  const [user, setUser] = useState("")
 
   const handleLogin = async () => {
     try {
+    
+      
       const response = await fetch('/login', {
         method: 'POST',
         headers: {
@@ -26,7 +30,7 @@ function Login() {
           type: "edit-current-user-name",
           payload: {
               name: email,
-              id: data.token
+              
           }
       })
         navigat("/home")
@@ -43,7 +47,7 @@ function Login() {
 
   return (
     <div className="App">
-      
+        <h1>{user}</h1>
         <div>
           <h2>Login</h2>
           <input
@@ -60,7 +64,7 @@ function Login() {
           />
           <button onClick={handleLogin}>Login</button>
         </div>
-      )}
+   
     </div>
   );
 }

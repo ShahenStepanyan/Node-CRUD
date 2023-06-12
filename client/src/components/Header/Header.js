@@ -14,12 +14,14 @@ export default function Header(props) {
     const name = useSelector(function (state) {
         return state.currentUser.name;
     });
+    
+    const id = "6485d535a2be391c129f5fa2"
 
     const goTo = () => {
         if(name === ''){
             navigate("/login")
         }else {
-            navigate(`/profile`)
+            navigate(`/profile/${id}`)
         }
     }
     return (
@@ -27,7 +29,8 @@ export default function Header(props) {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    <h1>{props.id}</h1>
+                    
+                  
                     </Typography>
                     <Button onClick={goTo} color="inherit"><AccountCircleIcon/></Button>
                 </Toolbar>

@@ -16,8 +16,7 @@ const store = createStore(function (state,action){
 }, {
     currentUser: {
         name: "",
-        id: "",
-      
+        id: "6485d535a2be391c129f5fa2",
     }
 })
 

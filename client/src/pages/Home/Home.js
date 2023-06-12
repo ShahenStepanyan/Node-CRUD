@@ -43,6 +43,7 @@ function Home() {
       })
       .catch((err) => console.log(err));
   }
+ 
 
   const handleDelete = async (id) => {
     const response = await fetch(`/api/data/${id}`, { method: 'DELETE' });
