@@ -1,0 +1,13 @@
+
+
+.norm {
+  border: 1px solid black;
+ 
+}
+
+.pagination {
+  display: flex;
+  text-align: center;
+  text-decoration: none;
+  list-style-type: none;
+}
