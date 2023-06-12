@@ -4,8 +4,9 @@ import '../../App.css'
 import { useState ,  } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate,  useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate,  useSearchParams, useHistory } from "react-router-dom";
 import Stack from "@mui/material/Stack";
+
 import Button from "@mui/material/Button";
 
 import Card from "@mui/material/Card";
@@ -22,10 +23,18 @@ const useStyles = makeStyles({
   }
 })
 
+
+
+
 function Home() {
+  
+
   const classes = useStyles()
  
   const [pageInfo, setPageInfo] = useSearchParams();
+
+  const page = pageInfo.get("page")
+ 
   const name = useSelector(function (state) {
     return state.currentUser.name;
   });
@@ -59,13 +68,18 @@ function Home() {
       return true;
     }
   }
-  const [currentPage, setCurrentPage] = useState(localStorage.getItem(pageInfo));
+  const [currentPage, setCurrentPage] = useState(page);
   const recordsPerPage = 10;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = data.slice(firstIndex, lastIndex);
   const npage = Math.ceil(data.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
+
+  useEffect(() => {
+    changeCPage(Number(page))
+  },[])
+
 
   return (
     <div className='container '>
@@ -124,6 +138,8 @@ function Home() {
       <nav style={{ marginTop: "25px", marginBottom: "25px" }}>
         <ul className="pagination">
           {numbers.map((n, i) => {
+            
+          
             return (
               <div key={i} className="cont">
                 
@@ -131,12 +147,10 @@ function Home() {
                  className={`${currentPage === n ? classes.active : 'norm'}`}
                  style={{width: "70px", cursor: "pointer", height: "30px", borderRadius: "5%"}}
                   key={i}
-                  
+                 
                   onClick={() => {
-                    setPageInfo({page: n})
-                    localStorage.setItem("pageinfo", n)
-                    console.log(localStorage.getItem("pageinfo"))
                     changeCPage(n)
+                    
                   }}
                 >
                   <span>{n}</span>
@@ -157,6 +171,7 @@ function Home() {
  
   function changeCPage(id) {
     setCurrentPage(id);
+    setPageInfo({page: id})
   }
 }
 export default Home;
