@@ -7,7 +7,8 @@ const store = createStore(function (state,action){
            ...state,
            currentUser: {
                name: action.payload.name,
-               id: action.payload.id
+               id: action.payload.id,
+               
            }
        }
    }
@@ -15,7 +16,8 @@ const store = createStore(function (state,action){
 }, {
     currentUser: {
         name: "",
-        id: 0,
+        id: "",
+      
     }
 })
 

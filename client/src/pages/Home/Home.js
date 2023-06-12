@@ -7,12 +7,14 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate,  useSearchParams } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Header from "../../components/Header/Header";
 import { makeStyles } from '@material-ui/core';
+
 
 const useStyles = makeStyles({
   active: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles({
 
 function Home() {
   const classes = useStyles()
-  
+ 
   const [pageInfo, setPageInfo] = useSearchParams();
   const name = useSelector(function (state) {
     return state.currentUser.name;
@@ -41,6 +43,14 @@ function Home() {
       })
       .catch((err) => console.log(err));
   }
+
+  const handleDelete = async (id) => {
+    const response = await fetch(`/api/data/${id}`, { method: 'DELETE' });
+    alert("Deleted")
+    fetchData()
+
+  };
+
   function tesdel(value) {
     if (name === value) {
       return false;
@@ -91,7 +101,7 @@ function Home() {
                   <Button disabled={tesdel(d.creator)} variant='outlined'>
                     <Link
                       style={{ textDecoration: "none" }}
-                      to={`/update/${d.id}`}
+                      to={`/update/${d._id}`}
                     >
                       Edit
                     </Link>
@@ -102,7 +112,7 @@ function Home() {
                   <Button
                     disabled={tesdel(d.creator)}
                     variant='outlined'
-                    onClick={(e) => handleDelete(d.id)}
+                    onClick={(e) => handleDelete(d._id)}
                   >
                     Delete
                   </Button>
@@ -141,16 +151,7 @@ function Home() {
     </div>
   );
 
-  function handleDelete(id) {
-    const confirm = window.confirm("Do you like to Delete?");
-    if (confirm) {
-      axios.delete("http://localhost:3002/post/" + id).then((res) => {
-        alert("Record Deleted");
-        navigate("/home");
-        window.location.reload();
-      });
-    }
-  }
+
 
  
   function changeCPage(id) {

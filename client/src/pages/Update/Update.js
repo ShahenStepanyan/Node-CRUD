@@ -8,25 +8,28 @@ import Header from "../../components/Header/Header";
 
 
 function Update() {
-
+        
     const {id} = useParams();
 
     const [inputData, setInputData] = useState({
-        id: id,
         title: '',
         body: ''
     })
     const navigate = useNavigate();
-
-    useEffect(() => {
-        axios.get('http://localhost:3002/post/'+id)
-        .then(res => setInputData(res.data))
-        .catch(err => console.log(err))
-    }, [id])
-
-    const handleSubmit = (event) => {
+    console.log(id)
+   
+   
+    
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        apiInfo(inputData, navigate, "put", id)
+        const response = await fetch(`/update/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inputData)
+            
+          });
+          console.log(inputData)
+         
     }
 
 
@@ -34,10 +37,11 @@ function Update() {
     <div >
         <Header/>
         <div >
+
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="id">ID:</label>
-                    <input type="number" disabled name='id' value={inputData.id}
+                    <input type="number" disabled name='id' value={id}
                     />
                 </div>
                 <div>

@@ -5,6 +5,8 @@ const app = express();
 const { MongoClient } = require('mongodb');
 const uri = 'mongodb+srv://shahenstepanyan2018:shag.2005.@basa.qwhxadb.mongodb.net/blog?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
+const {ObjectId} = require("mongodb")
+
 
 async function connect() {
   try {
@@ -107,6 +109,21 @@ function authenticateToken(req, res, next) {
   });
 }
 
+app.delete('/api/data/:id', async (req, res) => {
+  const collection = client.db('blog').collection('data');
+  const result = await collection.deleteOne({ _id: new ObjectId(req.params.id) });
+  res.json({ message: 'Data deleted' });  
+});
+
+app.put('/update/:id', async (req, res) => {
+  const collection = client.db('blog').collection('data');
+  const updateData = req.body;
+  const result = await collection.updateOne(
+    { _id: new ObjectId(req.params.id) },
+    { $set: updateData }
+  );
+  res.json({ message: 'Data updated' });
+});
 
 
 // Start the server
