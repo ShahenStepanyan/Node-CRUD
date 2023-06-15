@@ -22,7 +22,7 @@ export default function Profile() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios({
-        url: `/prof/${id}`,
+        url: `/api/profile/${id}`,
         method: "put",
         header: {
             "Content-Type": "application/json"

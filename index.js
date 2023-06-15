@@ -48,7 +48,7 @@ const User = mongoose.model('User', UserSchema);
 
 
 app.use(express.json());
-app.put("/prof/:id", async (req,res) => {
+app.put("/api/profile/:id", async (req,res) => {
   const collection = client.db('blog').collection('users');
   const updateData = req.body;
   const result = await collection.updateOne(
@@ -92,7 +92,7 @@ app.get('/data', async (req, res) => {
 
 
 
-app.post('/create', async (req, res) => {
+app.post('api/create', async (req, res) => {
   const collection = client.db('blog').collection('data');
   const newData = req.body;
   const result = await collection.insertOne(newData);
@@ -125,17 +125,20 @@ app.delete('/api/data/:id', async (req, res) => {
   res.json({ message: 'Data deleted' });  
 });
 
-app.put('/update/:id', async (req, res) => {
+app.put('/api/update/:id', async (req, res) => {
   const collection = client.db('blog').collection('data');
   const updateData = req.body;
   const result = await collection.updateOne(
     { _id: new ObjectId(req.params.id) },
     { $set: updateData }
   );
-  res.json({ message: 'Data updated' });
+  res.json({ 
+    message: 'Data updated', 
+    data: updateData
+});
 });
 
-app.get("/read/:id", async (req,res) => {
+app.get("/api/posts/:id", async (req,res) => {
   try{
     const collection = client.db('blog').collection('data');
   const result = await collection.findOne(

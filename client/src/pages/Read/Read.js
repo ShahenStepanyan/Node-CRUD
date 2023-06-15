@@ -13,7 +13,7 @@ function Read() {
 
   useEffect(() => {
     axios
-      .get(`/read/${id}`)
+      .get(`/api/posts/${id}`)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);

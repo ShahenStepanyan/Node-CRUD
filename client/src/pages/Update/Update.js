@@ -22,7 +22,7 @@ function Update() {
     
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch(`/update/${id}`, {
+        const response = await fetch(`api/update/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inputData)
