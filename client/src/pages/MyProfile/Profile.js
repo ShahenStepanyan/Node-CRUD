@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
-import {apiInfo} from "../../api/Api";
-import { useNavigate, useParams} from 'react-router-dom';
+import { apiInfo } from "../../api/Api";
+import { useNavigate, useParams } from "react-router-dom";
 export default function Profile() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const name = useSelector(function (state) {
     return state.currentUser.name;
   });
-  const {id} = useParams();
+  const { id } = useParams();
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
@@ -22,45 +22,52 @@ export default function Profile() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios({
-        url: `/api/profile/${id}`,
-        method: "put",
-        header: {
-            "Content-Type": "application/json"
-        },
-        data: inputData
-    }).then(res => {
-        console.log(inputData)
-        alert("Data Updated Successfully!")
-         navigate('/home')
-    })
-}
-
+      url: `/api/profile/${id}`,
+      header: {
+        "Content-Type": "application/json",
+      },
+      data: inputData,
+    }).then((res) => {
+      console.log(inputData);
+      alert("Data Updated Successfully!");
+      navigate("/home");
+    });
+  };
 
   return (
-    <form >
+    <form>
       <h1>{name}</h1>
       <div>
         <div>
           <h2>Date Account</h2>
           <h4>{inputData.date}</h4>
         </div>
-        
+
         <div>
-          
           <h2>UserEmail</h2>
-          <input required type="text" value={inputData.email}
-          onChange={e => setInputData({...inputData, email: e.target.value})}
+          <input
+            required
+            type="text"
+            value={inputData.email}
+            onChange={(e) =>
+              setInputData({ ...inputData, email: e.target.value })
+            }
           />
-          <Button onClick={handleSubmit} variant='outlined'>
+          <Button onClick={handleSubmit} variant="outlined">
             <ChangeCircleIcon />
           </Button>
         </div>
         <div>
           <h2>Password</h2>
-            <input required type="text" value={inputData.password}
-            onChange={e => setInputData({...inputData, password: e.target.value})}
-            />
-          <Button onClick={handleSubmit}  variant='outlined'>
+          <input
+            required
+            type="text"
+            value={inputData.password}
+            onChange={(e) =>
+              setInputData({ ...inputData, password: e.target.value })
+            }
+          />
+          <Button onClick={handleSubmit} variant="outlined">
             <ChangeCircleIcon />
           </Button>
         </div>

@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from 'react-redux'
-import axios from 'axios';
+import { useDispatch } from "react-redux";
+
 function Login() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigat = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
-  const [user, setUser] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState("");
 
   const handleLogin = async () => {
     try {
-    
-      
-      const response = await fetch('/login', {
-        method: 'POST',
+      const response = await fetch("/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -29,42 +27,38 @@ function Login() {
         dispatch({
           type: "edit-current-user-name",
           payload: {
-              name: email,
-              
-          }
-      })
-        navigat("/home")
+            name: email,
+          },
+        });
+        navigat("/home");
       } else {
         alert(data.error);
       }
     } catch (error) {
       console.error(error);
-      alert('Failed to log in');
+      alert("Failed to log in");
     }
   };
 
-
-
   return (
     <div className="App">
-        <h1>{user}</h1>
-        <div>
-          <h2>Login</h2>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleLogin}>Login</button>
-        </div>
-   
+      <h1>{user}</h1>
+      <div>
+        <h2>Login</h2>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={handleLogin}>Login</button>
+      </div>
     </div>
   );
 }

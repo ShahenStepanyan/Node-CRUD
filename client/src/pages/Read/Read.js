@@ -17,11 +17,11 @@ function Read() {
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
-  
+
   return (
-    <div className='container'>
-      <Header/>
-      <div className='container p-5'>
+    <div className="container">
+      <Header />
+      <div className="container p-5">
         <div style={{ border: "1px solid black" }}>
           <p>Title</p>
           <p>{Data.title}</p>
@@ -31,7 +31,7 @@ function Read() {
           <p>{Data.body}</p>
         </div>
 
-        <Link to='/home'>Back</Link>
+        <Link to="/home">Back</Link>
       </div>
     </div>
   );

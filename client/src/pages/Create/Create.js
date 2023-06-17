@@ -23,28 +23,28 @@ function Create() {
   };
   return (
     <div>
-      <Header/>
+      <Header />
       <div style={{ textAlign: "center" }}>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor='name'>title</label>
+            <label htmlFor="name">title</label>
             <br />
             <input
               required
-              type='text'
-              name='title'
+              type="text"
+              name="title"
               onChange={(e) =>
                 setInputData({ ...inputData, title: e.target.value })
               }
             />
           </div>
           <div>
-            <label htmlFor='text'>body</label>
+            <label htmlFor="text">body</label>
             <br />
             <input
               required
-              type='text'
-              name='body'
+              type="text"
+              name="body"
               onChange={(e) =>
                 setInputData({ ...inputData, body: e.target.value })
               }
