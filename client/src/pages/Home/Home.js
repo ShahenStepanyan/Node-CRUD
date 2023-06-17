@@ -114,7 +114,7 @@ function Home() {
 
           <Stack spacing={1} direction="row">
             <Button disabled={tesdel(d.creator)} variant="outlined">
-              <Link style={{ textDecoration: "none" }} to={`/update/${d._id}`}>
+              <Link  style={{ textDecoration: "none" }} to={`/update/${d._id}`}>
                 Edit
               </Link>
             </Button>

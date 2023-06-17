@@ -1,6 +1,7 @@
 import * as React from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,6 +17,12 @@ export default function Profile() {
     password: "",
     date: Date.now(),
   });
+  useEffect(() => {
+    axios
+      .get(`/api/users/update/${id}`)
+      .then((res) =>  setInputData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

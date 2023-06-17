@@ -1,6 +1,6 @@
 
 
-export const apiInfo = async (inputData, navigate, met) => {
+export const apiInfo = async (inputData) => {
 
     
      await fetch('/api/create', {
@@ -12,6 +12,5 @@ export const apiInfo = async (inputData, navigate, met) => {
           creator: inputData.creator
         })
       });
-      alert("successfully")
-      navigate('/home')
+     
 }

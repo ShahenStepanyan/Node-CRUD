@@ -19,7 +19,9 @@ function Create() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    apiInfo(inputData, navigator, "post");
+    apiInfo(inputData);
+    alert("successfully")
+      navigator('/home')
   };
   return (
     <div>

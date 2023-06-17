@@ -72,6 +72,19 @@ app.post("/api/create", async (req, res) => {
   const newData = req.body;
   const result = await collection.insertOne(newData);
 });
+app.get("/api/users/update/:id", async (req, res) => {
+  try {
+    const collection = client.db("blog").collection("users");
+    const result = await collection.findOne({
+      _id: new ObjectId(req.params.id),
+    });
+    res.json({
+      email: result.email,
+      password: result.password,
+    });
+  } catch (error) {}
+});
+
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -124,6 +137,20 @@ app.get("/api/posts/:id", async (req, res) => {
     });
   } catch (error) {}
 });
+
+app.get("/api/posts/update/:id", async (req, res) => {
+  try {
+    const collection = client.db("blog").collection("data");
+    const result = await collection.findOne({
+      _id: new ObjectId(req.params.id),
+    });
+    res.json({
+      title: result.title,
+      body: result.body,
+    });
+  } catch (error) {}
+});
+
 
 app.listen(3001, () => {
   console.log("Server started on port 3001");

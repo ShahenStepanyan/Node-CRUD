@@ -1,6 +1,7 @@
 
 import React from "react";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 
@@ -12,6 +13,12 @@ function Update() {
     body: "",
   });
   const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get(`/api/posts/update/${id}`)
+      .then((res) => setInputData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,10 +36,11 @@ function Update() {
     <div>
       <Header />
       <div>
+        
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="id">ID:</label>
-            <input type="number" disabled name="id" value={id} />
+            <label htmlFor="id">ID: {id}</label>
+          
           </div>
           <div>
             <label htmlFor="name">Title</label>

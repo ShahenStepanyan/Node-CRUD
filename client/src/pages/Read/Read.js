@@ -31,7 +31,7 @@ function Read() {
           <p>{Data.body}</p>
         </div>
 
-        <Link to="/home">Back</Link>
+        <Link to="/home">Home</Link>
       </div>
     </div>
   );
