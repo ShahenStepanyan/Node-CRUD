@@ -34,7 +34,7 @@ app.put("/api/profile/:id", async (req, res) => {
   res.json({ message: "Data updated" });
 });
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -48,6 +48,7 @@ app.post("/login", async (req, res) => {
     if (user) {
       res.send({
         succes: true,
+        id: user._id
       });
     } else {
       res.send("Invalid username or password");
@@ -60,7 +61,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/data", async (req, res) => {
+app.get("/api/data", async (req, res) => {
   const collection = client.db("blog").collection("data");
   const data = await collection.find().toArray();
   res.json(data);

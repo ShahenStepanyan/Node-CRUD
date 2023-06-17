@@ -1,10 +1,8 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
-import { apiInfo } from "../../api/Api";
 import { useNavigate, useParams } from "react-router-dom";
 export default function Profile() {
   const navigate = useNavigate();
@@ -16,22 +14,20 @@ export default function Profile() {
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
-    date: "",
+    date: Date.now(),
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios({
-      url: `/api/profile/${id}`,
-      header: {
-        "Content-Type": "application/json",
-      },
-      data: inputData,
-    }).then((res) => {
-      console.log(inputData);
-      alert("Data Updated Successfully!");
-      navigate("/home");
+    await fetch(`/api/profile/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(inputData),
     });
+    alert("Data Updated Successfully!");
+    
+      navigate("/home");
+
   };
 
   return (

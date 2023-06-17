@@ -14,8 +14,11 @@ export default function Header(props) {
   const name = useSelector(function (state) {
     return state.currentUser.name;
   });
+  const id = useSelector(function (state) {
+    return state.currentUser.id;
+  });
 
-  const id = "6485d535a2be391c129f5fa2";
+
 
   const goTo = () => {
     if (name === "") {

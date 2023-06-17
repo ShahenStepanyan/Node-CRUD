@@ -44,7 +44,7 @@ function Home() {
   }, []);
   const fetchData = async () => {
     axios
-      .get("/data")
+      .get("/api/data")
       .then((res) => {
         return setData(res.data);
       })
@@ -52,7 +52,7 @@ function Home() {
   };
 
   const handleDelete = async (id) => {
-    const response = await fetch(`/api/data/${id}`, { method: "DELETE" });
+    await fetch(`/api/data/${id}`, { method: "DELETE" });
     alert("Deleted");
     fetchData();
   };

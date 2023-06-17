@@ -1,8 +1,7 @@
-import axios from "axios";
+
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { apiInfo } from "../../api/Api";
 import Header from "../../components/Header/Header";
 
 function Update() {
@@ -16,7 +15,7 @@ function Update() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(`/api/update/${id}`, {
+     await fetch(`/api/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputData),

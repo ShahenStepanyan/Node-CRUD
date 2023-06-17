@@ -8,11 +8,11 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
-  const [user, setUser] = useState("");
+
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,16 +21,18 @@ function Login() {
       });
 
       const data = await response.json();
-
-      if (response.ok) {
+      
+      if (data.succes === true) {
         setToken(data.token);
         dispatch({
           type: "edit-current-user-name",
           payload: {
             name: email,
+            id: data.id
           },
         });
         navigat("/home");
+        
       } else {
         alert(data.error);
       }
@@ -42,7 +44,7 @@ function Login() {
 
   return (
     <div className="App">
-      <h1>{user}</h1>
+      
       <div>
         <h2>Login</h2>
         <input
