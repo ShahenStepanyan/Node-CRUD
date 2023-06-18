@@ -35,7 +35,7 @@ app.put("/api/profile/:id", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     await client.connect();
@@ -43,12 +43,13 @@ app.post("/api/login", async (req, res) => {
     const db = client.db("blog");
 
     const userCollection = db.collection("users");
-    const user = await userCollection.findOne({ username, password });
+    const user = await userCollection.findOne({ email, password });
 
-    if (user) {
+    if (user.email === email) {
       res.send({
         succes: true,
         id: user._id,
+        
       });
     } else {
       res.send("Invalid username or password");
