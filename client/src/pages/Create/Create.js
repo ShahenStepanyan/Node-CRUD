@@ -20,8 +20,8 @@ function Create() {
   const handleSubmit = (event) => {
     event.preventDefault();
     apiInfo(inputData);
-    alert("successfully")
-      navigator('/home')
+    alert("successfully");
+    navigator("/home");
   };
   return (
     <div>

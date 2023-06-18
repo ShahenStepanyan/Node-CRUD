@@ -1,4 +1,3 @@
-
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -22,25 +21,23 @@ function Update() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-     await fetch(`/api/update/${id}`, {
+    await fetch(`/api/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputData),
     });
 
-    alert("successfully")
-    navigate("/home")
+    alert("successfully");
+    navigate("/home");
   };
 
   return (
     <div>
       <Header />
       <div>
-        
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="id">ID: {id}</label>
-          
           </div>
           <div>
             <label htmlFor="name">Title</label>

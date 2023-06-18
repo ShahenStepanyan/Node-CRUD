@@ -4,11 +4,7 @@ import "../../App.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import {
-  Link,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 
 import Button from "@mui/material/Button";
@@ -73,10 +69,9 @@ function Home() {
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
   useEffect(() => {
-    
     changeCPage(Number(page));
-    if(Number(page) === 0) {
-      changeCPage(1)
+    if (Number(page) === 0) {
+      changeCPage(1);
     }
   }, []);
 
@@ -113,10 +108,12 @@ function Home() {
           </Card>
 
           <Stack spacing={1} direction="row">
-            <Button disabled={tesdel(d.creator)} variant="outlined">
-              <Link  style={{ textDecoration: "none" }} to={`/update/${d._id}`}>
-                Edit
-              </Link>
+            <Button
+              disabled={tesdel(d.creator)}
+              onClick={() => navigate(`/update/${d._id}`)}
+              variant="outlined"
+            >
+              Edit
             </Button>
 
             <span> </span>

@@ -9,7 +9,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
 
-
   const handleLogin = async () => {
     try {
       const response = await fetch("/api/login", {
@@ -21,18 +20,17 @@ function Login() {
       });
 
       const data = await response.json();
-      
+
       if (data.succes === true) {
         setToken(data.token);
         dispatch({
           type: "edit-current-user-name",
           payload: {
             name: email,
-            id: data.id
+            id: data.id,
           },
         });
         navigat("/home");
-        
       } else {
         alert(data.error);
       }
@@ -44,7 +42,6 @@ function Login() {
 
   return (
     <div className="App">
-      
       <div>
         <h2>Login</h2>
         <input
